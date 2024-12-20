@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: node-service
+  namespace: flexcrew
+  labels:
+    app: node-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: node-service
+  template:
+    metadata:
+      labels:
+        app: node-service
+    spec:
+      imagePullSecrets:
+        - name: flexcrew
+      containers:
+        - name: node-service
+          image: harshalsable1/snapee-node:Prod-Node-95
+          command: ["nodemon", "/app/index.js"]
+          imagePullPolicy: Always
+          resources:
+            requests:
+              cpu: "128m"
+              memory: "512Mi"
+            limits:
+              cpu: "512m"
+              memory: "1024Mi"
