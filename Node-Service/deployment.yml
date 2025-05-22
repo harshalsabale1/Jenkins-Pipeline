@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: node-service
-  namespace: flexcrew
+  namespace: test
   labels:
     app: node-service
 spec:
@@ -16,11 +16,10 @@ spec:
         app: node-service
     spec:
       imagePullSecrets:
-        - name: flexcrew
+        - name: test
       containers:
         - name: node-service
-          image: harshalsable1/snapee-node:Prod-Node-95
-          command: ["nodemon", "/app/index.js"]
+          image: harshalsable1/nginx
           imagePullPolicy: Always
           resources:
             requests:
